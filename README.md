@@ -36,9 +36,6 @@ Upload your labeled CSV to the working directory (file name: emotions.csv)
 
 In the script, be sure to update the place where the dataset is located.
 
-python
-Copy
-Edit
 You can read the file with the code: df = pd.read_csv('/path/to/emotions.csv')
 Open and run the Python script in your terminal.
 
