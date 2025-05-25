@@ -1,58 +1,74 @@
- Emotion Classification with SVM
-This project performs emotion classification on text using a Support Vector Machine (SVM) model. It includes tweet scraping, preprocessing, clustering (unsupervised learning), model training, performance evaluation, persistence, and an optional alert system.
+# SVM was used for the task of emotion classification.
+For this project, we employed SVM as part of a pipeline that classifies the emotion in tweets. The process consists of cleaning data, using TF-IDF to extract top features, training all possible SVM kernels, evaluating and saving away the top model.
 
- Project Structure
+## Features
+-Removes URLs, mentions, hashtags, punctuation, numbers and stopwords from raw tweet text.
 
-├── emotions.csv                # Main dataset (pre-labeled)
-├── best_svm_model.pkl          # Saved best-performing SVM model
-├── tfidf_vectorizer.pkl        # Saved TF-IDF vectorizer
-├── label_encoder.pkl           # Saved label encoder
-├── emotion_classifier.py       # Main code file (or .ipynb if notebook)
-└── README.md                   # This file
-⚙️ Features
-✅ 1. Tweet Scraping (Real-Time)
-Uses snscrape to fetch tweets matching emotional keywords (happy, sad, angry, etc.).
+-Applies the process of stemming to bring all words to their root.
 
-Saves them in a DataFrame for classification.
+-Transforms emotion labels into numbers.
 
-✅ 2. Text Preprocessing
-Lowercasing, URL/user/hashtag removal
+-Changes text into a list of TF-IDF feature vectors.
 
-Punctuation and number cleaning
+-Builds and examines SVM classifiers for four types of kernels (linear, poly, rbf, sigmoid).
 
-Stopword removal
+-Presents both classification scores and heat maps showing the confusion matrix.
 
-Stemming using PorterStemmer
+-Keeps the best trained model, TF-IDF vectorizer and label encoder for next use in inferenc
 
-✅ 3. Clustering (KMeans)
-Applies KMeans clustering to scraped tweets (unsupervised learning)
+## Installation
+It is important to have Python 3.7 or higher installed before continuing. After that, install the necessary libraries.
 
-Helps detect patterns or emotional clusters without labels
+You can install pandas, numpy, scikit-learn, matplotlib, seaborn, nltk and joblib by typing 
+ pip install <name> for each.
+ 
+## Setup
+Download the NLTK data only one time before starting the code.
 
-✅ 4. SVM Classification
-Trains multiple SVM models using different kernels: linear, poly, rbf, and sigmoid
+python
+Copy
+Edit
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+Usage
+Upload your labeled CSV to the working directory (file name: emotions.csv)
 
-Evaluates using accuracy, precision, recall, and F1-score
+In the script, be sure to update the place where the dataset is located.
 
-Visualizes confusion matrices
+python
+Copy
+Edit
+You can read the file with the code: df = pd.read_csv('/path/to/emotions.csv')
+Open and run the Python script in your terminal.
 
-✅ 5. Model Persistence
-Saves:
+Clean all your collected tweets before working with them.
 
-Best SVM model (best_svm_model.pkl)
+Encode labels
 
-TF-IDF vectorizer (tfidf_vectorizer.pkl)
+Devide the data into groups for training and for testing.
 
-Label encoder (label_encoder.pkl)
+Turn your text into a vector using TF-IDF.
 
-✅ 6. Optional Alerting System
-Flags and prints alerts for negative emotions (e.g., sad, angry) from scraped tweets
+Test SVM models by using various kernels.
 
-📈 Best Model Summary
-Kernel	Accuracy	F1-Score
-Linear	0.874	0.873
-Sigmoid	0.873	0.872
-RBF	0.856	0.852
-Poly	0.644	0.602
+Draw confusion matrices and show how they differ in performance.
 
-➡️ Best Performing Kernel: linear
+Save your best model along with all the things that help it.
+
+Files Saved
+The contacts.svm model is the best performing SVM classifier.
+
+tfidf_vectorizer.pkl: This file is used to make TF-IDF vectors for feature extraction
+
+This file contains a label encoder that lets you understand labeled predictions.
+
+Adding to the Pipeline
+To gather live tweets, either use the snscrape package or the Twitter API.
+
+KMeans is a type of unsupervised clustering, so use it on the TF-IDF features to explore your data set.
+
+Your application should be set up to warn users (using emails, for example) once emotions are spotted during interactions.
+
+You should use grid or random search to find the best settings for SVM parameters.
+
